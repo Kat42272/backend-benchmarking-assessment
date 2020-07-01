@@ -13,6 +13,9 @@ for an arbitrary list of strings.
 __author__ = "Kathryn Anderson"
 
 import sys
+import cProfile
+import re
+from collections import defaultdict
 
 
 def alphabetize(string):
@@ -27,11 +30,9 @@ def find_anagrams(words):
     Example:
     {'dgo': ['dog'], 'act': ['cat', 'act']}
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    anagrams = defaultdict(list)
+    for word in words:
+        anagrams[alphabetize(word)].append(word)
     return anagrams
 
 
